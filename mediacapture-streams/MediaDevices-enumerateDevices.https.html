@@ -29,6 +29,12 @@ test(function () {
       if ( mediainfo.kind == "audioinput" ||
           mediainfo.kind == "videoinput") {
         assert_true(mediainfo instanceof InputDeviceInfo);
+        assert_true(undefined !== mediainfo.getCapabilities(), "InputDeviceInfo.getCapabilities() should exist.");
+        var capabilities = mediainfo.getcapabilities();
+        assert_true(undefined !== capabilities.deviceId, "MediaTrackCapabilities's deviceId should exist.");
+        assert_true(undefined !== capabilities.groupId, "MediaTrackCapabilities's groupId should exist.");
+        if (mediainfo.kind == "audioinput")
+          assert_true(undefined !== capabilities.echoCancellation, "MediaTrackCapabilities's echoCancellation should exist for an audio input device.");
       } else if ( mediainfo.kind == "audiooutput" ) {
         assert_true(mediainfo instanceof MediaDeviceInfo);
       } else {
